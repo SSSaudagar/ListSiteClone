@@ -1,0 +1,8 @@
+1) Extract kohana
+2) modify application/bootstrap.php, set timezone, base url and the modules to be used
+3) open in your browser and check
+4) rename/delete install.php
+5) create a file in application/view
+6) edit welcome controller in application/classes/controller/ point it to read the view created in the last step
+7) go to modules/database/classes/kohana/database/mysql.php and add database details
+
