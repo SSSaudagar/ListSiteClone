@@ -154,28 +154,33 @@
     <div class="container">
         <?php
             $res=getMovies();
-            while($row=mysql_fetch_assoc($res)) print_r($row);
+            while($row=mysql_fetch_assoc($res)) {
         ?>
         
         <div class="row listing">
-            <div class="col-md-5"><img src="../../assets/images/3.jpg"> </div>
+            <div class="col-md-5"><img src="../../assets/images/<?=$row['movieID'] ?>.jpg"> </div>
             <div class="col-md-5">
-                <h2><a href="#">Lovey Dovey</a></h2>
-                <p>A cute-awkward, unromantically- romantic and unconventional story of an army man celebrating Valentines Day with his wife and trying to woo her. Watch his hilarious attempts and her indifference, </p>
-                <h4>INDIA/20mins</h4>
-                <h4>DIR:Adeeb Rai</h4>
+                <h2><a href="#"><?=$row['movieName'] ?></a></h2>
+                <p><?=substr($row['description'],0,300) ?>... </p>
+                <h4><?=getCountries($row['movieID']) ?>/<?=getTime($row['time']) ?></h4>
+                <h4>DIR:<?=$row['directorName'] ?></h4>
                 <p class="genres">
-                    <span><a class="btn btn-small btn-default">Comedy</a></span>
-                    <span><a class="btn btn-small btn-default">Drama</a></span>
-                    <span><a class="btn btn-small btn-default">Indian</a></span>
-                    <span><a class="btn btn-small btn-default">Romance</a></span>
+                    <?php 
+                        $gen=getGenres($row['movieID']);
+                        while($genre=mysql_fetch_assoc($gen)){
+                    ?>
+                    <span><a class="btn btn-small btn-default"><?=$genre['genreName'] ?></a></span>
+                    <?php } ?>
+                    
                 </p>
             </div>
             <div class="col-md-2 col3">
-                <h4>237<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></h4>
-                <h4>84<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></h4>
+                <h4><?=$row['views'] ?> <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></h4>
+                <h4><?=$row['likes'] ?> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></h4>
             </div>
         </div>
+        <hr>
+        <?php } ?>
         <div class="row paging">
             <a><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
             <a>1</a>
