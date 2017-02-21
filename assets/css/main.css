@@ -1,0 +1,29 @@
+.listing > .col-md-5 > img{
+    width:100%;
+    margin:10px;
+}
+.col3{
+    padding-top: 60pt;
+}
+h2>a{
+    color: red;
+    text-decoration-line: none;
+}
+h2>a:hover{
+    color: deeppink;
+    text-decoration-line: none;
+}
+genres>span{
+    margin-right: 20pt;
+}
+.rightbtn{
+    position: absolute;
+    right: 10px;
+}
+.paging{
+    text-align: center;
+    width:300px;
+    padding-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
