@@ -73,28 +73,11 @@
                         <div class="col-md-9">
                             <select name="genre" id="genre" class="form-control">
                                 <option value="">All</option>
-                                <option value="2">Indian</option>
-                                <option value="7">Horror</option>
-                                <option value="9">Sci-Fi</option>
-                                <option value="4">Thriller</option>
-                                <option value="11">Award Winning</option>
-                                <option value="5">Animation</option>
-                                <option value="8">Romance</option>
-                                <option value="6">Comedy</option>
-                                <option value="14">Famous Directors</option>
-                                <option value="10">Fantasy</option>
-                                <option value="12">Experimental</option>
-                                <option value="13">Bed Time Stories</option>
-                                <option value="15">Dark</option>
-                                <option value="22">Drama</option>
-                                <option value="33">Disaster Porn</option>
-                                <option value="34">Short Doc</option>
-                                <option value="35">Oscar Winning</option>
-                                <option value="44">Family</option>
-                                <option value="55">Surreal</option>
-                                <option value="57">Space</option>
-                                <option value="59">Offline</option>
-                                <option value="1">Uncategorized</option>
+                                <?php $allGenre=getAllGenres();
+                                    while($oneGenre=mysql_fetch_assoc($allGenre)){
+                                ?>
+                                <option value="<?=$oneGenre['genreID']?>"><?=$oneGenre['genreName']?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -106,25 +89,11 @@
                         <div class="col-md-9">
                             <select name="language" id="language" class="form-control">
                                 <option value="">All</option>
-
-                                <option value="20">French</option>
-                                <option value="21">Romanian</option>
-                                <option value="24">Hindi</option>
-                                <option value="25">English</option>
-                                <option value="26">Japanese</option>
-                                <option value="37">German</option>
-                                <option value="39">Korean</option>
-                                <option value="41">Spanish</option>
-                                <option value="43">Mandarin</option>
-                                <option value="46">Swedish</option>
-                                <option value="49">Arabic</option>
-                                <option value="52">Persian</option>
-                                <option value="53">Catalan</option>
-                                <option value="56">Marathi</option>
-                                <option value="58">Assamese</option>
-                                <option value="65">Bengali</option>
-                                <option value="74">Danish</option>
-                                <option value="93">Malayalam</option>
+                                <?php $allLang=getLanguages();
+                                    while($lang=mysql_fetch_assoc($allLang)){
+                                ?>
+                                <option value="<?=$lang['languageID']?>"><?=$lang['languageName']?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -153,7 +122,7 @@
 
     <div class="container">
         <?php
-            $res=getMovies();
+            $res=getMovies(NULL,NULL,1);
             while($row=mysql_fetch_assoc($res)) {
         ?>
         
