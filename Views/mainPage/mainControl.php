@@ -2,10 +2,19 @@
     require_once("../../connect/connection.php");
     $sql="select * from movies";
     
-function getMovies($genre,$language,$sort=1){
+function checkGet($string){
+    if(isset($_GET) and isset($_GET[$string]) and !empty($_GET[$string])){
+        return $_GET[$string];
+    }
+    else return false;
+}
+function getMovies($str,$genre,$language,$sort=1,$page){
     $sql="SELECT * FROM `movies` M join `directors` join `languages` on M.director = `directors`.directorID and M.`language` = `languages`.`languageID` WHERE 1 ";
     if($language!=NULL){
         $sql.="and M.`language` = ".$language." ";
+    }
+    if($str!=NULL){
+        $sql.="and M.`movieName` like '%".$str."%' ";
     }
     if($genre!=NULL){
         $sql.="and M.movieID in (select movie from genre_movies where genre=".$genre.") ";
@@ -21,6 +30,8 @@ function getMovies($genre,$language,$sort=1){
             $sql.="order by timestamp desc";
             break;
     }
+    $page-=1;
+    $sql.=" limit 3 offset ".$page;
     $result=mysql_query($sql) or die("Mysql query failed: ".$sql);
     return $result;
 }
