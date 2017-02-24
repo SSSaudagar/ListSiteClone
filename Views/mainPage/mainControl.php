@@ -38,6 +38,7 @@ function getMovies($str,$genre,$language,$sort=1,$page,$direction){//function th
     return $result;
 }
 function previous($param){ //return link for previous page in pagination
+    if(!isset($param['page'])) $param["page"]=1;
     $param['page']-=1; 
     $res=http_build_query($param); 
     if($param['page']>0) $link=$_SERVER['PHP_SELF']."?".$res;
@@ -45,6 +46,7 @@ function previous($param){ //return link for previous page in pagination
     return $link;
 }
 function nextPage($param){//return link for next page in pagination
+    if(!isset($param['page'])) $param["page"]=1;
     $param['page']+=1; 
     $res=http_build_query($param); 
     if($param['page']>0) $link=$_SERVER['PHP_SELF']."?".$res;
