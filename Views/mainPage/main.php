@@ -61,6 +61,7 @@
                         <hr>
                     </div>
                     <input hidden="hidden" readonly name="page" value="1">
+<!--                    Search for a string-->
                     <div class="col-md-6">
                         <div class="form-horizontal">
                             <div class="form-group" id="title">
@@ -74,6 +75,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
+<!--                        Filter with genre-->
                         <div class="form-horizontal">
                             <div class="form-group">
                                 <label for="" class="col-md-3 control-label"><em>Genre:</em> </label>
@@ -91,7 +93,7 @@
                                 </div>
                             </div>
                         </div>
-
+<!--                        FIlter with Language-->
                         <div class="form-horizontal">
                             <div class="form-group">
                                 <label for="" class="col-md-3 control-label"><em>Language:</em> </label>
@@ -111,8 +113,8 @@
                         </div>
                     </div>
                     <div class="col-md-6">
+<!--                        Sort by -->
                         <div class="form-group row form-horizontal">
-
                             <label for="" class="col-md-3 control-label"><em>Sort by:</em> </label>
                             <div class="col-md-9">
                                 <select name="sort" id="sort" class="form-control">
@@ -121,15 +123,13 @@
                                     <option value="3" <?php if(checkGet( "sort")==3) echo "selected" ?>>Length</option>
                                 </select>
                             </div>
-
                         </div>
+<!--                        Sort Direction-->
                         <div class="form-group row form-horizontal">
                             <div class="col-md-3"> </div>
                             <div class="col-md-2 radio"><input class="" type="radio" name="direction" value="2" <?php if(checkGet("direction") and $_GET['direction']==2) echo "checked"; ?>>Ascending</div>
                             <div class="col-md-3 radio"><input class="" type="radio" name="direction" value="1" <?php if(checkGet("direction") and $_GET['direction']!=2) echo "checked"; ?>>Descending</div>
-                            
                             <div class="col-md-3"><button class="btn btn-success rightbtn">Search <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></div>
-                            
                         </div>
                     </div>
                 </div>
@@ -145,26 +145,24 @@
             $search=(checkGet("title"))? checkGet("title"):NULL;
             $page=(checkGet("page"))? checkGet("page"):1;
             $direction=(checkGet("direction"))? checkGet("direction"):1;
+//            function to get values from the database
             $res=getMovies($search,$genre,$language,$sort,$page,$direction);
             while($row=mysql_fetch_assoc($res)) {
         ?>
-
+<!--            Row for displaying each movie-->
                 <div class="row listing">
                     <div class="col-md-5"><img src="../../assets/images/<?=$row['movieID'] ?>.jpg"> </div>
                     <div class="col-md-5">
                         <h2><a href="#"><?=$row['movieName'] ?></a></h2>
-                        <p>
-                            <?=substr($row['description'],0,300) ?>... </p>
+                        <p><?=substr($row['description'],0,300) ?>... </p>
                         <h4><?=getCountries($row['movieID']) ?>/<?=getTime($row['time']) ?></h4>
                         <h4>Dir:<?=$row['directorName'] ?></h4>
                         <p class="genres">
-                            <?php 
-                        $gen=getGenres($row['movieID']);
+                        <?php $gen=getGenres($row['movieID']);
                         while($genre=mysql_fetch_assoc($gen)){
-                    ?>
-                                <span><a class="btn btn-small btn-default"><?=$genre['genreName'] ?></a></span>
-                                <?php } ?>
-
+                        ?>
+                            <span><a class="btn btn-small btn-default"><?=$genre['genreName'] ?></a></span>
+                        <?php } ?>
                         </p>
                     </div>
                     <div class="col-md-2 col3">
@@ -174,13 +172,13 @@
                 </div>
                 <hr>
                 <?php } ?>
+<!--            Paging to display only 3 movies per page-->
                     <div class="row paging">
                         <a href="<?=previous($_GET)?>"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
                         <span class="page">Page <?=(checkGet("page"))? checkGet("page"):1 ?></span>
                         <a href="<?=nextpage($_GET)?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
                     </div>
         </div>
-
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
