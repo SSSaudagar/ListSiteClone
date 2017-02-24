@@ -141,22 +141,9 @@
 
         <div class="container">
             <?php
-          //print_r($_GET);
-          if(isset($_GET) and isset($_GET["genre"]) and !empty($_GET['genre'])) {
-             $genre=$_GET['genre'];
-          }else{
-              $genre=NULL;
-          }
-            if(isset($_GET) and isset($_GET["language"]) and !empty($_GET['language'])) {
-             $language=$_GET['language'];
-          }else{
-              $language=NULL;
-          }
-            if(isset($_GET) and isset($_GET["sort"]) and !empty($_GET['sort'])) {
-             $sort=$_GET['sort'];
-          }else{
-              $sort=NULL;
-          }
+            $genre=(checkGet("genre"))? checkGet("genre"):NULL;
+            $language=(checkGet("language"))? checkGet("language"):NULL;
+            $sort=(checkGet("sort"))? checkGet("sort"):NULL;
             $search=(checkGet("title"))? checkGet("title"):NULL;
             $page=(checkGet("page"))? checkGet("page"):1;
             $res=getMovies($search,$genre,$language,$sort,$page);
