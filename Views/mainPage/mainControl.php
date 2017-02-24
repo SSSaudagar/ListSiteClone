@@ -31,9 +31,23 @@ function getMovies($str,$genre,$language,$sort=1,$page){
             break;
     }
     $page-=1;
-    $sql.=" limit 3 offset ".$page;
+    $sql.=" limit 3 offset ".(3*$page);
     $result=mysql_query($sql) or die("Mysql query failed: ".$sql);
     return $result;
+}
+function previous($param){
+    $param['page']-=1; 
+    $res=http_build_query($param); 
+    if($param['page']>0) $link=$_SERVER['PHP_SELF']."?".$res;
+    else return "#";
+    return $link;
+}
+function nextPage($param){
+    $param['page']+=1; 
+    $res=http_build_query($param); 
+    if($param['page']>0) $link=$_SERVER['PHP_SELF']."?".$res;
+    else return "#";
+    return $link;
 }
 
 function getTime($timeSecs){

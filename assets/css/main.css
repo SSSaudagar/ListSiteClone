@@ -23,10 +23,13 @@ genres>span{
 .paging{
     text-align: center;
     width:300px;
-    padding-top: 100px;
+    padding-top: 50px;
     margin-left: auto;
     margin-right: auto;
 }
 #title{
     margin-top: 25px;
+}
+.page{
+    font-size: 30px;
 }

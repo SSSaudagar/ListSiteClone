@@ -54,7 +54,7 @@
         <div class="jumbotron">
             <div class="row">
                 <div class="col-md-8">
-                    <h1>Explore</h1>
+                    <h2>Explore</h2>
                 </div>
                 <div class="col-md-3">
 
@@ -64,7 +64,7 @@
             <form action="<?=htmlentities($_SERVER['PHP_SELF']) ?>" method="get">
                 <div class="row">
                     <div class="col-md-6">
-                        <h2>Filter by</h2>
+                        <h3>Filter by</h3>
                         <hr>
                     </div>
                     <input hidden="hidden" readonly name="page" value="1">
@@ -170,7 +170,7 @@
                         <p>
                             <?=substr($row['description'],0,300) ?>... </p>
                         <h4><?=getCountries($row['movieID']) ?>/<?=getTime($row['time']) ?></h4>
-                        <h4>DIR:<?=$row['directorName'] ?></h4>
+                        <h4>Dir:<?=$row['directorName'] ?></h4>
                         <p class="genres">
                             <?php 
                         $gen=getGenres($row['movieID']);
@@ -189,11 +189,9 @@
                 <hr>
                 <?php } ?>
                     <div class="row paging">
-                        <a><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
-                        <a>1</a>
-                        <a>2</a>
-                        <a>3</a>
-                        <a><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                        <a href="<?=previous($_GET)?>"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+                        <span class="page">Page <?=(checkGet("page"))? checkGet("page"):1 ?></span>
+                        <a href="<?=nextpage($_GET)?>"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
                     </div>
         </div>
 
