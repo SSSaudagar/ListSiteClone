@@ -153,7 +153,7 @@
                 <div class="row listing">
                     <div class="col-md-5"><img src="../../assets/images/<?=$row['movieID'] ?>.jpg"> </div>
                     <div class="col-md-5">
-                        <h2><a href="#"><?=$row['movieName'] ?></a></h2>
+                        <h2><a href="../MoviePage/movie.php?id=<?=$row['movieID'] ?>&<?=http_build_query($_GET)?>"><?=$row['movieName'] ?></a></h2>
                         <p><?=substr($row['description'],0,300) ?>... </p>
                         <h4><?=getCountries($row['movieID']) ?>/<?=getTime($row['time']) ?></h4>
                         <h4>Dir:<?=$row['directorName'] ?></h4>

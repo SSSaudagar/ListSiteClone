@@ -13,9 +13,6 @@ h2>a:hover{
     color: deeppink;
     text-decoration-line: none;
 }
-genres>span{
-    margin-right: 20pt;
-}
 .rightbtn{
     position: absolute;
     right: 10px;
