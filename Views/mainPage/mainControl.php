@@ -8,7 +8,7 @@ function checkGet($string){
     }
     else return false;
 }
-function getMovies($str,$genre,$language,$sort=1,$page){
+function getMovies($str,$genre,$language,$sort=1,$page,$direction){
     $sql="SELECT * FROM `movies` M join `directors` join `languages` on M.director = `directors`.directorID and M.`language` = `languages`.`languageID` WHERE 1 ";
     if($language!=NULL){
         $sql.="and M.`language` = ".$language." ";
@@ -21,15 +21,17 @@ function getMovies($str,$genre,$language,$sort=1,$page){
     }
     switch($sort){
         case 2:
-            $sql.="order by likes desc";
+            $sql.="order by likes";
             break;
         case 3: 
             $sql.="order by time";
             break;
         default:
-            $sql.="order by timestamp desc";
+            $sql.="order by timestamp";
             break;
     }
+    if($direction==2) $sql.=" asc";
+    else $sql.=" desc";
     $page-=1;
     $sql.=" limit 3 offset ".(3*$page);
     $result=mysql_query($sql) or die("Mysql query failed: ".$sql);

@@ -8,9 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Movies</title>
-
         <!-- Bootstrap -->
         <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="../../assets/css/bootstrap-theme.min.css" rel="stylesheet">
@@ -19,15 +17,10 @@
         <link href="../../assets/css/main.css" rel="stylesheet">
 
 
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
     </head>
 
     <body>
+<!--        fixed header using bootstrap-->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -50,7 +43,7 @@
             </div>
         </nav>
 
-        <!-- Main component for a primary marketing message or call to action -->
+        <!-- Main component for searching and filtering -->
         <div class="jumbotron">
             <div class="row">
                 <div class="col-md-8">
@@ -73,7 +66,7 @@
                             <div class="form-group" id="title">
                                 <label for="" class="col-md-3 control-label"><em>Search:</em> </label>
                                 <div class="col-md-9">
-                                    <input class="form-control" name="title" placeholder="Search" value="<?=checkGet("title") ?>">
+                                    <input class="form-control" name="title" placeholder="Search" value="<?=checkGet(" title ") ?>">
                                 </div>
                             </div>
                         </div>
@@ -90,7 +83,7 @@
                                         <?php $allGenre=getAllGenres();
                                     while($oneGenre=mysql_fetch_assoc($allGenre)){
                                 ?>
-                                            <option value="<?=$oneGenre['genreID']?>" <?php if(checkGet("genre")==$oneGenre['genreID']) echo "selected" ?>>
+                                            <option value="<?=$oneGenre['genreID']?>" <?php if(checkGet( "genre")==$oneGenre[ 'genreID']) echo "selected" ?>>
                                                 <?=$oneGenre['genreName']?>
                                             </option>
                                             <?php } ?>
@@ -108,7 +101,7 @@
                                         <?php $allLang=getLanguages();
                                     while($lang=mysql_fetch_assoc($allLang)){
                                 ?>
-                                            <option value="<?=$lang['languageID']?>" <?php if(checkGet("language")==$lang['languageID']) echo "selected" ?>>
+                                            <option value="<?=$lang['languageID']?>" <?php if(checkGet( "language")==$lang[ 'languageID']) echo "selected" ?>>
                                                 <?=$lang['languageName']?>
                                             </option>
                                             <?php } ?>
@@ -123,15 +116,20 @@
                             <label for="" class="col-md-3 control-label"><em>Sort by:</em> </label>
                             <div class="col-md-9">
                                 <select name="sort" id="sort" class="form-control">
-                                    <option value="1" <?php if(checkGet("sort")==1) echo "selected"; ?>>Freshness</option>
-                                    <option value="2"<?php if(checkGet("sort")==2) echo "selected" ?>>Popularity</option>
-                                    <option value="3"<?php if(checkGet("sort")==3) echo "selected" ?>>Length</option>
+                                    <option value="1" <?php if(checkGet( "sort")==1) echo "selected"; ?>>Freshness</option>
+                                    <option value="2" <?php if(checkGet( "sort")==2) echo "selected" ?>>Popularity</option>
+                                    <option value="3" <?php if(checkGet( "sort")==3) echo "selected" ?>>Length</option>
                                 </select>
                             </div>
 
                         </div>
                         <div class="form-group row form-horizontal">
-                            <button class="btn btn-success rightbtn">Search <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            <div class="col-md-3"> </div>
+                            <div class="col-md-2 radio"><input class="" type="radio" name="direction" value="2" <?php if(checkGet("direction") and $_GET['direction']==2) echo "checked"; ?>>Ascending</div>
+                            <div class="col-md-3 radio"><input class="" type="radio" name="direction" value="1" <?php if(checkGet("direction") and $_GET['direction']!=2) echo "checked"; ?>>Descending</div>
+                            
+                            <div class="col-md-3"><button class="btn btn-success rightbtn">Search <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></div>
+                            
                         </div>
                     </div>
                 </div>
@@ -146,7 +144,8 @@
             $sort=(checkGet("sort"))? checkGet("sort"):NULL;
             $search=(checkGet("title"))? checkGet("title"):NULL;
             $page=(checkGet("page"))? checkGet("page"):1;
-            $res=getMovies($search,$genre,$language,$sort,$page);
+            $direction=(checkGet("direction"))? checkGet("direction"):1;
+            $res=getMovies($search,$genre,$language,$sort,$page,$direction);
             while($row=mysql_fetch_assoc($res)) {
         ?>
 

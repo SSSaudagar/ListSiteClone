@@ -33,3 +33,7 @@ genres>span{
 .page{
     font-size: 30px;
 }
+.radio{
+    display: inline;
+    min-height: auto;
+}
