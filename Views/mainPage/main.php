@@ -67,7 +67,7 @@
                             <div class="form-group" id="title">
                                 <label for="" class="col-md-3 control-label"><em>Search:</em> </label>
                                 <div class="col-md-9">
-                                    <input class="form-control" name="title" placeholder="Search" value="<?=checkGet(" title ") ?>">
+                                    <input class="form-control" name="title" placeholder="Search" value="<?=checkGet("title") ?>">
                                 </div>
                             </div>
                         </div>
